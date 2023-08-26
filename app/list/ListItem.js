@@ -12,7 +12,9 @@ export default async function ListItem(props) {
 
       <span
         onClick={() => {
-          fetch("/url").then(() => {});
+          fetch("/api/post/delete", {
+            method: "DELETE",
+          });
         }}
       >
         🚮
