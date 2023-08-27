@@ -7,7 +7,13 @@ export default async function List() {
   return (
     <div className="list-bg">
       {results.map((result) => {
-        return <ListItem result={result} />;
+        return (
+          <ListItem
+            id={result._id.toString()}
+            title={result.title}
+            content={result.content}
+          />
+        );
       })}
     </div>
   );

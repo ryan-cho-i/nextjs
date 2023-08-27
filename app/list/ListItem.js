@@ -2,24 +2,30 @@
 
 import Link from "next/link";
 
-export default async function ListItem(props) {
+export default function ListItem(props) {
   return (
     <div className="list-item">
-      <Link href={`/detail/${props.result._id}`}>
-        <h4>{result.title}</h4>
+      <Link href={`/detail/${props.id}`}>
+        <h4>{props.title}</h4>
       </Link>
-      <Link href={`/edit/${props.result._id}`}>📝</Link>
+      <Link href={`/edit/${props.id}`}>📝</Link>
 
       <span
-        onClick={() => {
+        onClick={(e) => {
           fetch("/api/post/delete", {
             method: "DELETE",
+            body: props.id,
+          }).then(() => {
+            e.target.parentElement.style.opacity = 0;
+            setTimeout(() => {
+              e.target.parentElement.style.display = "none";
+            }, 1000);
           });
         }}
       >
         🚮
       </span>
-      <p>{result.content}</p>
+      <p>{props.content}</p>
     </div>
   );
 }
