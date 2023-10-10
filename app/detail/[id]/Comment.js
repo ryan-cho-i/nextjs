@@ -1,9 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function Comment() {
+export default function Comment(props) {
   let [comment, setComment] = useState('');
+
+  useEffect(() => {
+    fetch('/URL')
+      .then((r) => r.json())
+      .then((result) => {});
+  }, []);
+
   return (
     <div>
       <div>Comment</div>
@@ -14,9 +21,9 @@ export default function Comment() {
       />
       <button
         onClick={() => {
-          fetch('/URL', {
+          fetch('/api/comment/new', {
             method: 'POST',
-            body: comment,
+            body: JSON.stringify({ comment: comment, _id: props._id }),
           });
         }}
       >
